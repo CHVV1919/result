@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="gu"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;600;700&family=Noto+Serif+Gujarati:wght@400;600;700&family=Hind+Vadodara:wght@400;600;700&family=Mukta+Vaani:wght@400;600;700&family=Baloo+Bhai+2:wght@400;600;700&family=Rasa:wght@400;600;700&family=Anek+Gujarati:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--c1:#1f4e79;--c1d:#14344f;--c1t:#e8eef6;--c1m:#c9d8ea;--c2:#fffdf7;--f:'Noto Sans Gujarati','Nirmala UI',sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:#eef2f8;color:#1c2430;font-family:var(--f);font-size:17px;line-height:1.6}
+.w{max-width:880px;margin:0 auto;padding:12px}
+.hero{background:linear-gradient(135deg,var(--c1),var(--c1d));color:#fff;border-radius:16px;padding:18px;display:flex;gap:14px;align-items:center;box-shadow:0 6px 20px rgba(0,0,0,.18);margin-bottom:14px}
+.lg{background:#fff;border-radius:50%;width:72px;height:72px;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden}.lg img{max-width:80%;max-height:80%}
+.hero h1{font-size:clamp(1.1rem,4.5vw,1.6rem);margin:0;line-height:1.3}.hero p{margin:2px 0 0;opacity:.9}
+.card{background:#fff;border:1px solid #d5dbe5;border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+h2{font-size:1.3rem;margin:0 0 10px;color:var(--c1)}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+label{display:block;color:#5d6b7e;margin-bottom:2px}
+select,input{width:100%;padding:10px;border:1px solid #c5ccd8;border-radius:10px;font:inherit}
+button{background:var(--c1);color:#fff;border:0;border-radius:10px;padding:10px 18px;font:inherit;font-weight:600;cursor:pointer;margin:2px}
+button.s{background:#fff;color:var(--c1);border:1px solid var(--c1);padding:4px 10px}
+.err{color:#c0392b;margin-top:6px}.ok{color:#1b7a2f}.hide{display:none}
+#scw{max-width:794px;margin:0 auto;overflow:hidden}
+#sheet{width:794px;transform-origin:top left;background:var(--c2);color:#1d1d1d;padding:22px;border:5px double var(--c1);font-family:var(--f);font-size:18px}
+#sheet .sh{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,var(--c1),var(--c1d));color:#fff;border-radius:12px;padding:14px 18px}
+#sheet .sh .lg{width:84px;height:84px}
+#sheet .sn{flex:1;text-align:center}#sheet .sn b{font-size:30px;display:block;line-height:1.3}#sheet .sn span{font-size:16px;opacity:.92;display:block}
+#sheet .ti{text-align:center;margin:14px 0 10px;font-size:24px;font-weight:700;color:var(--c1)}
+#sheet .ti small{display:block;font-size:19px;color:#444;font-weight:600}
+#sheet .inf{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;background:var(--c1t);border-radius:10px;padding:10px 14px}
+#sheet table{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0;border:1px solid var(--c1);border-radius:10px;overflow:hidden}
+#sheet th{background:var(--c1);color:#fff;padding:9px;font-size:17px;font-weight:600}
+#sheet td{padding:8px 10px;text-align:center;border-top:1px solid var(--c1m)}
+#sheet td.l{text-align:left}#sheet tr.z td{background:var(--c1t)}
+#sheet tr.t td{background:var(--c1m);font-weight:700;border-top:2px solid var(--c1)}
+#sheet tr.h td{background:var(--c1t);font-weight:700;color:var(--c1);text-align:left}
+#sheet .st{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+#sheet .st div{border:2px solid var(--c1);border-radius:12px;text-align:center;padding:8px;background:#fff}
+#sheet .st small{display:block;color:#555;font-size:17px}#sheet .st b{font-size:28px}
+#sheet .nt{font-size:16px;color:#444;margin-top:4px}
+#sheet .sg{display:flex;justify-content:space-between;align-items:flex-end;margin-top:34px;text-align:center;font-size:18px}
+#sheet .sg img{height:54px;display:block;margin:0 auto}
+@media print{body *{visibility:hidden}#scw,#scw *{visibility:visible}#scw{position:absolute;left:0;top:0;max-width:none;height:auto!important}#sheet{transform:none!important}@page{size:A4;margin:8mm}}
+</style></head>
+<body><div class="w">
+<div class="hero" id="top"></div>
+
+<div class="card hide" id="adm">
+ <h2>⚙️ એડમિન – Result Excel અપલોડ</h2>
+ <div class="g"><div><label>એડમિન પાસવર્ડ</label><input type="password" id="pw"></div>
+ <div><label>વર્ગની Excel ફાઇલો (.xlsm / .xlsx) – અનેક પસંદ કરી શકાય</label><input type="file" id="xl" accept=".xlsm,.xlsx" multiple></div></div>
+ <div id="log" style="margin-top:8px"></div><div id="lst" style="margin-top:8px"></div>
+</div>
+
+<div class="card"><h2>🎓 તમારું પરિણામ જુઓ</h2>
+ <div class="g">
+  <div><label>ધોરણ</label><select id="std"></select></div>
+  <div><label>વર્ગ</label><select id="cls"></select></div>
+  <div><label>પરીક્ષા</label><select id="exm"></select></div>
+  <div><label>રોલ નંબર અથવા જી.આર. નંબર</label><input id="key" autocomplete="off"></div>
+  <div id="dw" class="hide"><label>જન્મતારીખ (DD/MM/YYYY)</label><input id="dob" autocomplete="off" placeholder="15/06/2014"></div>
+ </div>
+ <p><button id="go">પરિણામ જુઓ</button></p><div id="msg" class="err"></div></div>
+<div id="out" class="hide">
+ <p><button id="pdf">📄 PDF ડાઉનલોડ કરો</button><button id="prt" style="background:#555">🖨️ પ્રિન્ટ</button></p>
+ <div id="scw"><div id="sheet"></div></div></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+/* ===== અહીં તમારી Apps Script ની /exec લિંક પેસ્ટ કરો ===== */
+const API='https://script.google.com/macros/s/AKfycbzQPUIEdd-tIK_BVhO_w2TuqckFQ0_ju93-Ro1wJQQ93Kl-Unt5CjeGDqgUNyPdi7oH/exec';
+const ADMIN=/[?&#]admin/.test(location.search+location.hash);
+function parseWorkbook(XLSX, buf) {
+  const names = XLSX.read(buf, { type: 'array', bookSheets: true }).SheetNames;
+  const std10 = names.indexOf('STUDENT DATA') >= 0 && names.indexOf('SCHOOL DATA') >= 0 && names.indexOf('Class Data') < 0;
+  if (!std10 && names.indexOf('Class Data') < 0)
+    throw new Error('આ ફાઇલનું ફોર્મેટ ઓળખાયું નથી (ફાઇલમાં છે: ' + names.slice(0, 8).join(', ') + '…)');
+  const wb = XLSX.read(buf, { type: 'array', sheets: std10
+    ? ['SCHOOL DATA', 'STUDENT DATA', 'FT-GENERAL', 'PRILIM-GENERAL', 'FTG10', 'STG10']
+    : ['Class Data', 'MARKS', 'FT-GENERAL', 'ST-GENERAL', 'SIDDHI-KRUPA'] });
+  return std10 ? parseStd10(XLSX, wb) : parseStd11(XLSX, wb);
+}
+function pkHelpers(XLSX, wb) {
+  const s = v => String(v == null ? '' : v).trim();
+  const num = v => typeof v === 'number' ? Math.round(v * 100) / 100 : v;
+  const dobf = v => { if (typeof v === 'number' && v > 20000) { const d = new Date(Math.round((v - 25569) * 864e5)), p = n => String(n).padStart(2, '0'); return p(d.getUTCDate()) + '/' + p(d.getUTCMonth() + 1) + '/' + d.getUTCFullYear(); } return s(v); };
+  const G = n => {
+    const ws = wb.Sheets[n]; if (!ws) throw new Error('શીટ મળી નથી: ' + n);
+    const rg = XLSX.utils.decode_range(ws['!ref']), g = [];
+    for (let r = 0; r <= Math.min(rg.e.r, 125); r++) { const row = []; for (let c = 0; c <= Math.min(rg.e.c, 70); c++) { const x = ws[XLSX.utils.encode_cell({ r, c })]; row.push(!x || x.t === 'e' || x.v == null ? '' : x.v); } g.push(row); }
+    return g;
+  };
+  const mv = v => v === '' ? null : (typeof v === 'number' ? num(v) : String(v).trim().toUpperCase());
+  return { s, num, dobf, G, mv };
+}
+
+/* ધોરણ 10 (SCHOOL DATA / STUDENT DATA વાળી ફાઇલ) */
+function parseStd10(XLSX, wb) {
+  const { s, num, dobf, G, mv } = pkHelpers(XLSX, wb);
+  const dg = t => String(t).replace(/[૦-૯]/g, d => '૦૧૨૩૪૫૬૭૮૯'.indexOf(d));
+  const sc = G('SCHOOL DATA'), sd = G('STUDENT DATA');
+  const parts = dg(s(sc[6][1])).split('-'), std = s(parts[0]), cls = s(parts.slice(1).join('-'));
+  if (!std) throw new Error('SCHOOL DATA શીટમાં ધોરણ-વર્ગ (B7) મળ્યો નથી');
+  const meta = { std, cls, year: s(sc[1][1]) + '-' + s(sc[1][2]), sch: { name: s(sc[2][1]), trust: '', addr: '', udise: '', idx: s(sc[3][1]), prin: s(sc[7][1]) }, ex: [] };
+  const stu = [];
+  for (let r = 2; r < sd.length; r++) { const nm = s(sd[r][6]); if (nm) stu.push({ s: r - 2, roll: s(sd[r][1]), gr: s(sd[r][5]), name: nm, dob: dobf(sd[r][9]), lang: s(sd[r][7]), prac: s(sd[r][8]), x: {} }); }
+  [['1', 'પ્રથમ પરીક્ષા', 'FT-GENERAL', 'FTG10'], ['2', 'પ્રિલિમિનરી પરીક્ષા', 'PRILIM-GENERAL', 'STG10']].forEach(([id, name, gn, tn]) => {
+    const g = G(gn), t = G(tn);
+    const sub = [3, 4, 5, 6, 7].map(c => { const mx = +g[5][c] || 80; return { n: s(g[3][c]), t: mx, p: Math.ceil(mx * 32.5 / 100) }; });
+    const mx6 = +g[5][8] || 80; sub.push({ n: 'વૈકલ્પિક ભાષા', t: mx6, p: Math.ceil(mx6 * 32.5 / 100) });
+    const cs = [{ n: 'યોગ / કમ્પ્યૂટર', t: +t[4][10] || 100, p: 33 }];
+    let any = false;
+    stu.forEach(S => {
+      const row = g[6 + S.s]; if (!row) return;
+      if (![3, 4, 5, 6, 7].some(c => row[c] !== '')) return;
+      any = true;
+      const lang = row[8] !== '' ? row[8] : row[9];
+      const m = [3, 4, 5, 6, 7].map(c => mv(row[c])); m.push(mv(lang));
+      const tr = t[5 + S.s] || [];
+      const got = tr[10] !== '' && tr[10] != null ? tr[10] : tr[11], grade = s(row[10]) || s(row[11]);
+      const res = s(row[16]).toUpperCase() === 'PASS' ? 'પાસ' : (s(row[16]) ? 'નાપાસ' : '');
+      S.x[id] = { m, nm: S.lang ? { 5: S.lang } : undefined, cs: [(got !== '' && got != null) || grade ? [mv(got), grade] : null],
+                  cn: S.prac || undefined, tot: num(row[13]), res, g: s(row[15]) };
+    });
+    if (!any) return;
+    const rs = stu.filter(S => S.x[id]);
+    rs.forEach(S => {
+      const r = S.x[id], ok = r.res === 'પાસ';
+      r.pc = ok ? Math.round(r.tot * 10000 / (+g[5][13] || 480)) / 100 : '---';
+      r.rk = ok ? 1 + rs.filter(o => o.x[id].res === 'પાસ' && o.x[id].tot > r.tot).length : '---';
+    });
+    meta.ex.push({ id, name, sub, cs, tm: +g[5][13] || 480 });
+  });
+  return { meta, data: stu.map(S => ({ roll: S.roll, gr: S.gr, name: S.name, dob: S.dob, x: S.x })) };
+}
+
+/* ધોરણ 9 / 11 (Class Data / MARKS વાળી ફાઇલ) */
+function parseStd11(XLSX, wb) {
+  const { s, num, dobf, G, mv } = pkHelpers(XLSX, wb);
+  const cd = G('Class Data'), mk = G('MARKS'), ft = G('FT-GENERAL'), st = G('ST-GENERAL'), sk = G('SIDDHI-KRUPA');
+  const parts = s(cd[2][2]).split('-'), std = s(parts[0]), cls = s(parts.slice(1).join('-'));
+  if (!std) throw new Error('Class Data શીટમાં ધોરણ-વર્ગ (C3) મળ્યો નથી');
+  const meta = { std, cls, year: s(cd[0][6]), sch: { name: s(cd[0][2]), trust: s(cd[1][2]), addr: s(cd[3][2]), udise: s(cd[1][6]), idx: s(cd[2][6]) }, ex: [] };
+  const blocks = [];
+  for (let c = 3; c < mk[4].length; c++) { const n = s(mk[4][c]); if (n) blocks.push({ n, c, prac: s(mk[5][c]).startsWith('થિયરી') }); }
+  const main = blocks.filter(b => !b.prac), co = blocks.filter(b => b.prac);
+  const stu = [];
+  for (let r = 8; r < cd.length; r++) { const nm = s(cd[r][4]); if (nm) stu.push({ s: r - 8, roll: s(cd[r][1]), gr: s(cd[r][2]), name: nm, dob: dobf(cd[r][5]), x: {} }); }
+  [[0, '1', 'પ્રથમ પરીક્ષા', ft], [1, '2', 'દ્વિતીય પરીક્ષા', st]].forEach(([k, id, name, sh]) => {
+    const sub = main.map(b => { const t = +mk[6][b.c + k] || 0; return { n: b.n, t, p: Math.ceil(t * 34 / 100) }; });
+    let any = false;
+    stu.forEach(S => {
+      const m = main.map(b => mv(mk[7 + S.s][b.c + k]));
+      if (m.some(v => v !== null)) { any = true; const f = sh[5 + S.s]; S.x[id] = { m, tot: num(f[9]), pc: num(f[10]), res: s(f[11]), rk: num(f[12]) }; }
+    });
+    if (any) meta.ex.push({ id, name, sub, tm: +sh[4][9] || 0 });
+  });
+  if (stu.some(S => main.some(b => mk[7 + S.s][b.c + 2] !== ''))) {
+    const sub = main.map(b => ({ n: b.n, t: +mk[6][b.c + 5] || 100, p: 33 }));
+    const cs = co.map(b => ({ n: b.n, t: +mk[6][b.c + 3] || 100 }));
+    stu.forEach(S => {
+      const row = mk[7 + S.s], g = sk[6 + S.s];
+      if (!main.some(b => row[b.c + 2] !== '')) return;
+      const m = main.map((b, j) => [0, 1, 2, 3].some(i => row[b.c + i] !== '') ? [num(g[3 + 3 * j]), num(g[4 + 3 * j]), num(g[5 + 3 * j])] : null);
+      const c = co.map(b => [0, 1, 2].some(i => row[b.c + i] !== '') ? [num(row[b.c + 3]), s(row[b.c + 4])] : null);
+      S.x['3'] = { m, cs: c, tot: num(g[27]), pc: num(g[28]), res: s(g[30]), rk: num(g[31]), sd: num(g[29]) };
+    });
+    meta.ex.push({ id: '3', name: 'વાર્ષિક પરીક્ષા', sub, cs, tm: +sk[5][27] || 700, ann: 1 });
+  }
+  return { meta, data: stu.map(S => ({ roll: S.roll, gr: S.gr, name: S.name, dob: S.dob, x: S.x })) };
+}
+
+const $=id=>document.getElementById(id),R=document.documentElement;
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const mix=(h,t,b=255)=>'#'+[1,3,5].map(i=>Math.round(parseInt(h.slice(i,i+2),16)*(1-t)+b*t).toString(16).padStart(2,'0')).join('');
+const call=async(o,post)=>{if(API.indexOf('PASTE')>=0)throw new Error('API લિંક મૂકવામાં આવી નથી');
+ const r=post?await fetch(API,{method:'POST',body:JSON.stringify(o)}):await fetch(API+'?'+new URLSearchParams(o));
+ const j=await r.json();if(j.e)throw new Error(j.e);return j.d};
+const run=(fn,...a)=>({getMeta:()=>call({action:'meta'}),
+ getResult:(tab,ex,key,dob)=>call({action:'result',tab,ex,key:key||'',dob:dob||''}),
+ adminCheck:pw=>call({action:'check',pw},1),
+ saveClass:(pw,meta,data)=>call({action:'save',pw,meta,data},1),
+ deleteClass:(pw,tab)=>call({action:'delete',pw,tab},1)}[fn](...a));
+let M,CUR,SC,LAST;
+function load(){return run('getMeta').then(m=>{M=m;SC=m.school;theme();M.list.sort((a,b)=>String(a.std).localeCompare(String(b.std),'gu',{numeric:true})||String(a.cls).localeCompare(String(b.cls)));M.vis=M.list.filter(c=>c.ex.length);opts(0);lst();
+ if(!M.vis.length)$('msg').textContent='પરિણામ હજી ઉપલબ્ધ નથી.'}).catch(()=>$('msg').textContent='ડેટા લોડ થયો નથી. પેજ ફરી ખોલો.')}
+function theme(){[['--c1',SC.c1],['--c1d',mix(SC.c1,.35,0)],['--c1t',mix(SC.c1,.92)],['--c1m',mix(SC.c1,.78)],['--c2',SC.c2],['--f',`'${SC.font}','Nirmala UI',sans-serif`]].forEach(([k,v])=>R.style.setProperty(k,v));
+ const f=(M.list[0]||{}).sch||{},name=SC.name||f.name||'શાળાનું નામ',addr=SC.addr||f.addr||'';document.title=name;
+ $('top').innerHTML=`<div class="lg">${SC.logo?`<img src="${SC.logo}">`:'🏫'}</div><div><h1>${esc(name)}</h1><p>${esc(addr)}</p></div>`;
+ if(SC.needDob)$('dw').classList.remove('hide')}
+const uniq=a=>[...new Set(a)],fill=(e,a)=>e.innerHTML=a.map(v=>`<option value="${esc(v[0])}">${esc(v[1])}</option>`).join('');
+const sel=()=>M.list.find(x=>x.std==$('std').value&&x.cls==$('cls').value);
+function opts(l){if(l<=0)fill($('std'),uniq(M.vis.map(x=>x.std)).map(v=>[v,v]));
+ if(l<=1)fill($('cls'),uniq(M.vis.filter(x=>x.std==$('std').value).map(x=>x.cls)).map(v=>[v,v]));
+ const c=sel();fill($('exm'),c?c.ex.map(e=>[e.id,e.name]):[])}
+$('std').onchange=()=>opts(1);$('cls').onchange=()=>opts(2);
+function find(){$('msg').textContent='';$('out').classList.add('hide');const c=sel();
+ if(!c||!c.ex.length){$('msg').textContent='પરિણામ હજી ઉપલબ્ધ નથી.';return}
+ $('go').disabled=true;$('go').textContent='શોધી રહ્યા છીએ…';const done=()=>{$('go').disabled=false;$('go').textContent='પરિણામ જુઓ'};
+ run('getResult',c.tab,$('exm').value,$('key').value,$('dob').value).then(r=>{done();if(r.err)$('msg').textContent=r.err;else show(r)}).catch(()=>{done();$('msg').textContent='કંઈક ભૂલ થઈ, ફરી પ્રયત્ન કરો.'})}
+$('go').onclick=find;$('key').onkeydown=e=>{if(e.key==='Enter')find()};
+function fit(){const k=Math.min(1,$('scw').clientWidth/794),s=$('sheet');s.style.transform=`scale(${k})`;$('scw').style.height=s.offsetHeight*k+'px'}
+addEventListener('resize',fit);
+const isNum=v=>typeof v==='number';
+const passed=r=>/પાસ/.test(r)&&!/નાપાસ/.test(r);
+const red=' style="color:#c0392b"';
+function show(d){CUR=d.st;const ex=d.ex,r=d.st.r,sch=Object.assign({},d.sch,{}),S=SC;
+ const name=S.name||sch.name||'',addr=S.addr||sch.addr||'',ok=passed(r.res),prin=(S.prin&&!/…/.test(S.prin))?S.prin:(sch.prin||S.prin);
+ let head,rows='';
+ if(ex.ann){
+  head='<tr><th style="text-align:left">વિષય</th><th>કુલ ગુણ</th><th>મેળવેલ ગુણ</th><th>સિદ્ધિ ગુણ</th><th>કૃપા ગુણ</th></tr>';
+  let a=0,b=0,n=0;
+  ex.sub.forEach((s,i)=>{const m=r.m[i];if(!m)return;a+=m[1];b+=m[2];rows+=`<tr class="${n++%2?'z':''}"><td class="l">${esc(s.n)}</td><td>${s.t}</td><td><b${m[0]+m[1]+m[2]<s.p?red:''}>${m[0]}</b></td><td>${m[1]}</td><td>${m[2]}</td></tr>`});
+  rows+=`<tr class="t"><td class="l">કુલ ટોટલ</td><td>${ex.tm}</td><td>${r.tot}</td><td>${a}</td><td>${b}</td></tr>`;
+  const cs=(ex.cs||[]).map((s,i)=>r.cs&&r.cs[i]?`<tr><td class="l">${esc(s.n)}</td><td>ગ્રેડ</td><td><b${r.cs[i][1]==='E'?red:''}>${esc(r.cs[i][1]||r.cs[i][0])}</b></td><td colspan="2"></td></tr>`:'').join('');
+  if(cs)rows+=`<tr class="h"><td colspan="5">વૈકલ્પિક વિષયો</td></tr>`+cs;
+ }else{
+  head='<tr><th style="text-align:left">વિષય</th><th>કુલ ગુણ</th><th>પાસિંગ ગુણ</th><th>મેળવેલ ગુણ</th></tr>';let n=0;
+  ex.sub.forEach((s,i)=>{const v=r.m[i];if(v===null)return;const bad=v==='AB'||(isNum(v)&&v<s.p);rows+=`<tr class="${n++%2?'z':''}"><td class="l">${esc((r.nm&&r.nm[i])||s.n)}</td><td>${s.t}</td><td>${s.p}</td><td><b${bad?red:''}>${esc(v)}</b></td></tr>`});
+  (ex.cs||[]).forEach((c,i)=>{const q=r.cs&&r.cs[i];if(!q)return;const bad=q[0]==='AB'||q[1]==='E'||(isNum(q[0])&&q[0]<c.p);rows+=`<tr><td class="l">${esc(r.cn||c.n)}</td><td>ગ્રેડ</td><td>ગ્રેડ</td><td><b${bad?red:''}>${esc(q[1]||(q[0]===null?'':q[0]))}</b></td></tr>`});
+  rows+=`<tr class="t"><td class="l">કુલ ટોટલ</td><td>${ex.tm}</td><td></td><td>${r.tot}</td></tr>`;
+ }
+ const md=r.rk==1?'🥇 ':r.rk==2?'🥈 ':r.rk==3?'🥉 ':'';
+ const info=[sch.udise?'UDISE: '+sch.udise:'',sch.idx?'શાળા ઇન્ડેક્ષ: '+sch.idx:''].filter(Boolean).join(' | ');
+ $('sheet').innerHTML=`<div class="sh"><div class="lg">${S.logo?`<img src="${S.logo}">`:'🏫'}</div><div class="sn">${sch.trust?`<span>${esc(sch.trust)}</span>`:''}<b>${esc(name)}</b><span>${esc(addr)}</span>${info?`<span>${esc(info)}</span>`:''}</div></div>
+ <div class="ti">${ex.ann?'વાર્ષિક પરીક્ષાનું ગુણપત્રક':'પરિણામ પત્રક'}<small>${esc(ex.name)} ${d.year?'('+esc(d.year)+')':''}</small></div>
+ <div class="inf"><div>નામ: <b>${esc(d.st.name)}</b></div><div>ધોરણ / વર્ગ: <b>${esc(d.std)}${d.cls?' / '+esc(d.cls):''}</b></div><div>રોલ નં.: <b>${esc(d.st.roll)}</b> &nbsp; જી.આર. નં.: <b>${esc(d.st.gr)}</b></div><div>જન્મતારીખ: <b>${esc(d.st.dob)}</b></div></div>
+ <table>${head}${rows}</table>
+ <div class="st"><div><small>ટકા</small><b>${isNum(r.pc)?r.pc+'%':'---'}</b></div>${r.g?`<div><small>ગ્રેડ</small><b>${esc(r.g)}</b></div>`:''}<div><small>પરિણામ</small><b style="font-size:${r.res.length>8?20:28}px;color:${ok?'#1b7a2f':'#c0392b'}">${esc(r.res)}</b></div><div><small>રેન્ક</small><b>${isNum(r.rk)?md+r.rk:'---'}</b></div></div>
+ ${S.note?`<div class="nt">${esc(S.note)}</div>`:''}
+ <div class="sg"><div style="width:200px"><br><br>વર્ગશિક્ષકની સહી</div><div style="width:220px">${S.sign?`<img src="${S.sign}">`:'<br><br>'}<b>${esc(prin)}</b><br>(આચાર્ય)</div></div>`;
+ $('out').classList.remove('hide');fit();document.fonts.ready.then(fit);$('out').scrollIntoView({behavior:'smooth'})}
+$('prt').onclick=()=>window.print();
+$('pdf').onclick=async()=>{try{await document.fonts.ready;
+ const h=document.createElement('div');h.style.cssText='position:absolute;left:-10000px;top:0;width:794px';
+ const c0=$('sheet').cloneNode(true);c0.style.transform='none';h.appendChild(c0);document.body.appendChild(h);
+ const c=await html2canvas(c0,{scale:2,backgroundColor:'#ffffff'});h.remove();
+ const p=new window.jspdf.jsPDF('p','mm','a4');let w=190,ht=c.height*w/c.width;if(ht>277){w=w*277/ht;ht=277}
+ p.addImage(c.toDataURL('image/jpeg',.95),'JPEG',(210-w)/2,10,w,ht);p.save('Result_'+String(CUR.roll).replace(/\W/g,'')+'.pdf');
+ }catch(e){$('msg').textContent='PDF ન બને તો ‘પ્રિન્ટ’ દબાવી “PDF તરીકે સાચવો” પસંદ કરો.'}};
+// ---------- એડમિન ----------
+function lst(){if(!ADMIN)return;$('lst').innerHTML=M.list.map(c=>`<div>• ધોરણ ${esc(c.std)}-${esc(c.cls)} | ${esc(c.year)} | પરીક્ષા: ${c.ex.map(e=>esc(e.name)).join(', ')||'—'} <button class="s" data-t="${esc(c.tab)}">દૂર કરો</button></div>`).join('')}
+if(ADMIN){$('adm').classList.remove('hide');
+ $('lst').onclick=async e=>{const t=e.target.dataset.t;if(!t||!confirm('આ વર્ગનો ડેટા દૂર કરવો?'))return;
+  try{await run('deleteClass',$('pw').value,t);await load()}catch(x){$('log').innerHTML=`<div class="err">${esc(x.message||x)}</div>`}};
+ $('xl').onchange=async e=>{const L=$('log');L.innerHTML='';const log=(t,c)=>L.insertAdjacentHTML('beforeend',`<div class="${c||''}">${t}</div>`);
+  try{await run('adminCheck',$('pw').value)}catch(x){log('પાસવર્ડ ખોટો છે','err');e.target.value='';return}
+  for(const f of e.target.files){try{log('વાંચી રહ્યા છીએ: '+esc(f.name));
+   const r=parseWorkbook(XLSX,new Uint8Array(await f.arrayBuffer()));
+   await run('saveClass',$('pw').value,JSON.stringify(r.meta),JSON.stringify(r.data));
+   log(`✔ ધોરણ ${esc(r.meta.std)}-${esc(r.meta.cls)}: ${r.data.length} વિદ્યાર્થી, પરીક્ષા: ${r.meta.ex.map(x=>esc(x.name)).join(', ')||'હજી કોઈ ગુણ ભરેલા નથી'}`,'ok')}
+   catch(x){log('✘ '+esc(f.name)+': '+esc(x.message||x),'err')}}
+  e.target.value='';await load()}}
+load();
+</script></body></html>
